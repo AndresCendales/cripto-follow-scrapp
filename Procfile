@@ -1,1 +1,1 @@
-web: scrapy crawl coinbase
+web: main.html
