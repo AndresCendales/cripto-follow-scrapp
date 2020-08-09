@@ -8,16 +8,20 @@ DeclarativeBase = declarative_base()
 
 def db_connect():
     """
-    Performs database connection using database settings from settings.py.
-    Returns sqlalchemy engine instance
-    
+    Conecta con la base de datos relacionada en settings    
     """
     return create_engine(URL(**settings.DATABASE))
 
 class DataPrices(DeclarativeBase):
+    """
+    Modelo para guardar la informacion del item generado en los spiders
+    """
+
     __tablename__ = "crypto_currencies_price"
     
     id = Column(Integer,primary_key = True)
+    date = Column('date')
     crypto_currency = Column('crypto_currency',String)
     price = Column('price')
-
+    source = Column('source')
+    time_stamp = Column('time_stamp')

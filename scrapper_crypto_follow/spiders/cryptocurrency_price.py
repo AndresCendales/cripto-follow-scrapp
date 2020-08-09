@@ -2,14 +2,25 @@ import scrapy
 import datetime
 from scrapy.crawler import CrawlerProcess
 
-TODAY = datetime.date.today().strftime('%d-%m-%Y')
-TIME = datetime.datetime.now().strftime('%HH-%MM')
-#TIME = datetime.datetime.now()
+#Captura la fecha actual
+DATE = datetime.date.today().strftime('%d-%m-%Y') 
 
-OUTPUT = ''
+#Captura la hora actual
+#TIME = datetime.datetime.now().strftime('%MM-%HH')
+
+#Captura timestamp actual UTC+5
+TIME_STAMP = datetime.datetime.now()
+
+#Tasa de cambio 
 USD_COP = 3792
 
 class SpiderCoinbase(scrapy.Spider):
+    """Spider para el website Coibase.com
+
+    Returns:
+        [Item]: Item con informacion scrapeada por cada url 
+    """
+
     name = 'coinbase'
     start_urls = [  
             'https://www.coinbase.com/price/bitcoin',
@@ -19,9 +30,10 @@ class SpiderCoinbase(scrapy.Spider):
     ]
     
     custom_settings = {
-        'FEED_URI' : f'/mnt/d/Platzi/Projects/crypto-follow-project/scrapper_crypto_follow/data/data.csv',
-        'FEED_FORMAT' : 'csv',
-        'FEED_EXPORT_ENCODING':'utf-8'
+        #Guardar data en csv
+        #'FEED_URI' : 'RUTA DEL ARCHIVO',
+        #'FEED_FORMAT' : 'csv',
+        #'FEED_EXPORT_ENCODING':'utf-8'
     }
     
     def parse(self, response):
@@ -34,17 +46,24 @@ class SpiderCoinbase(scrapy.Spider):
         price = round(price / USD_COP,2)
 
         return {
-            'date': TODAY,
-            'time': TIME,
+            'date': DATE,
+            #'time': TIME,
             'crypto_currency': crypto_currency,
             'price' : price,
-            'currency': 'USD',            
-            'source': 'coinbase'
+            'source': 'coinbase',
+            'time_stamp': TIME_STAMP         
+            
         }
 
 
 class SpiderCoinMarketCap(scrapy.Spider):
-    name = 'Coin_Market_Cap'
+    """Spider para el website coin market cap
+
+    Returns:
+        [Item]: Item con informacion scrapeada por cada url 
+    """
+
+    name = 'coin_market_cap'
 
     start_urls = [  
             'https://coinmarketcap.com/es/currencies/bitcoin/',
@@ -55,15 +74,17 @@ class SpiderCoinMarketCap(scrapy.Spider):
     
     
     custom_settings = {
-        'FEED_URI' : f'/mnt/d/Platzi/Projects/crypto-follow-project/scrapper_crypto_follow/data/data.csv',
-        'FEED_FORMAT' : 'csv',
-        'FEED_EXPORT_ENCODING':'utf-8'
+        #Guardar data en csv
+        #'FEED_URI' : 'RUTA DEL ARCHIVO',
+        #'FEED_FORMAT' : 'csv',
+        #'FEED_EXPORT_ENCODING':'utf-8'
     }
     
     def parse(self, response):
 
         crypto_currency = response.xpath('//div[contains(@class,"panel-header")]/h1/span/text()').get()
-
+        crypto_currency = crypto_currency.replace('(','')
+        crypto_currency = crypto_currency.replace(')','')
         price = response.xpath('//span[contains(@class,"panel-price__price")]/text()').get()
         
         price = price.replace(',','')
@@ -72,16 +93,22 @@ class SpiderCoinMarketCap(scrapy.Spider):
         
 
         return {
-            'date': TODAY,
-            'time': TIME,
+            'date': DATE,
+            #'time': TIME,
             'crypto_currency': crypto_currency,
             'price' : price,
-            'currency': 'USD',            
-            'source': 'Coin Market Cap'
+            'source': 'coin_market_cap',
+            'time_stamp': TIME_STAMP     
         }
 
 
 class SpiderBeinCrypto(scrapy.Spider):
+    """Spider para el website be in crypto
+
+    Returns:
+        [Item]: Item con informacion scrapeada por cada url 
+    """
+
     name = 'be_in_crypto'
     start_urls = [  
             'https://es.beincrypto.com/precio/bitcoin/',
@@ -92,9 +119,10 @@ class SpiderBeinCrypto(scrapy.Spider):
     ]
     
     custom_settings = {
-        'FEED_URI' : f'/mnt/d/Platzi/Projects/crypto-follow-project/scrapper_crypto_follow/data/data.csv',
-        'FEED_FORMAT' : 'csv',
-        'FEED_EXPORT_ENCODING':'utf-8'
+        #Guardar data en csv
+        #'FEED_URI' : 'RUTA DEL ARCHIVO',
+        #'FEED_FORMAT' : 'csv',
+        #'FEED_EXPORT_ENCODING':'utf-8'
     }
     
     def parse(self, response):
@@ -109,11 +137,11 @@ class SpiderBeinCrypto(scrapy.Spider):
 
 
         return {
-            'date': TODAY,
-            'time': TIME,
+            'date': DATE,
+            #'time': TIME,
             'crypto_currency': crypto_currency[0],
             'price' : price,
-            'currency': 'USD',            
-            'source': 'Be in Crypto'
+            'source': 'be_in_crypto',
+            'time_stamp': TIME_STAMP  
         }
 

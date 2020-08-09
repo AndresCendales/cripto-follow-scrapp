@@ -13,22 +13,18 @@ from scrapper_crypto_follow.models import DataPrices, db_connect
 
 
 class ScrapperCryptoFollowPipeline:
-    """pipeline para guardar datos"""
+    """Pipeline para guardar datos"""
         
     def __init__(self):
         """
         Initializes database connection and sessionmaker.
-        Creates deals table.
         """
         engine = db_connect()
-        #create_deals_table(engine)
         self.Session = sessionmaker(bind=engine)
 
     def process_item(self, item, spider):
-        """Save deals in the database.
-
-        This method is called for every item pipeline component.
-
+        """
+        Guarda en la ase de ddatos
         """
         session = self.Session()
         data_price = DataPrices(**item)
