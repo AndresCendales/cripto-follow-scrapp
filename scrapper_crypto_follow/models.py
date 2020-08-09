@@ -24,4 +24,3 @@ class DataPrices(DeclarativeBase):
     crypto_currency = Column('crypto_currency',String)
     price = Column('price')
     source = Column('source')
-    time_stamp = Column('time_stamp')

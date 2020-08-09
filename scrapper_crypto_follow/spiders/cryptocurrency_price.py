@@ -8,12 +8,6 @@ DATE = datetime.date.today().strftime('%d-%m-%Y')
 #Captura la hora actual
 #TIME = datetime.datetime.now().strftime('%MM-%HH')
 
-#Captura timestamp actual UTC+5
-TIME_STAMP = datetime.datetime.now()
-
-#Tasa de cambio 
-USD_COP = 3792
-
 class SpiderCoinbase(scrapy.Spider):
     """Spider para el website Coibase.com
 
@@ -43,7 +37,7 @@ class SpiderCoinbase(scrapy.Spider):
 
         price = response.xpath('//span[contains(@class,"AssetChartAmount__Number")]/text()').get()
         price = float(price.replace(',',''))
-        price = round(price / USD_COP,2)
+        price = round(price,2)
 
         return {
             'date': DATE,
@@ -51,8 +45,6 @@ class SpiderCoinbase(scrapy.Spider):
             'crypto_currency': crypto_currency,
             'price' : price,
             'source': 'coinbase',
-            'time_stamp': TIME_STAMP         
-            
         }
 
 
@@ -97,8 +89,7 @@ class SpiderCoinMarketCap(scrapy.Spider):
             #'time': TIME,
             'crypto_currency': crypto_currency,
             'price' : price,
-            'source': 'coin_market_cap',
-            'time_stamp': TIME_STAMP     
+            'source': 'coin_market_cap'    
         }
 
 
@@ -141,7 +132,6 @@ class SpiderBeinCrypto(scrapy.Spider):
             #'time': TIME,
             'crypto_currency': crypto_currency[0],
             'price' : price,
-            'source': 'be_in_crypto',
-            'time_stamp': TIME_STAMP  
+            'source': 'be_in_crypto', 
         }
 
