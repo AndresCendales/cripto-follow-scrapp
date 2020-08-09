@@ -87,7 +87,7 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 DATABASE = {
-    'drivevrname' : 'postgres',
+    'drivername' : 'postgres',
     'host': 'ec2-34-236-215-156.compute-1.amazonaws.com',
     'port': '5432',
     'username': 'axhwvdaoxbqqhi',

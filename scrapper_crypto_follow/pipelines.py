@@ -9,7 +9,7 @@ from itemadapter import ItemAdapter
 
 #postgress
 from sqlalchemy.orm import sessionmaker
-from models import DataPrices, db_connect
+from scrapper_crypto_follow.models import DataPrices, db_connect
 
 
 class ScrapperCryptoFollowPipeline:
