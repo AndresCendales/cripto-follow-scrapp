@@ -3,3 +3,4 @@ scrapyd==1.2.1
 heroku==0.1.4
 zope.interface==5.1.0
 cffi==1.14.1
+sqlalchemy == SQLAlchemy==1.3.18
