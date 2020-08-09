@@ -1,1 +1,1 @@
-web: scrapy crawl caissSpider
+web: scrapy crawl coinbase
