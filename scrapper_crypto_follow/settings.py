@@ -62,9 +62,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'scrapper_crypto_follow.pipelines.ScrapperCryptoFollowPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'scrapper_crypto_follow.pipelines.ScrapperCryptoFollowPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -86,3 +86,11 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+DATABASE = {
+    'drivevrname' : 'postgres',
+    'host': 'ec2-34-236-215-156.compute-1.amazonaws.com',
+    'port': '5432',
+    'username': 'axhwvdaoxbqqhi',
+    'password': '4c4dd61eb8d0d1782218d6df056106a34b8c451a98295b4470ca3e9f2f5b3d25',
+    'database': 'd86h49goci93if'
+}
