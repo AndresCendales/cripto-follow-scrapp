@@ -3,7 +3,7 @@ import datetime
 from scrapy.crawler import CrawlerProcess
 
 #Captura la fecha actual
-DATE = datetime.date.today().strftime('%d-%m-%Y') 
+DATE = datetime.date.today().strftime('%Y-%m-%d') 
 
 #Captura la hora actual
 #TIME = datetime.datetime.now().strftime('%MM-%HH')
